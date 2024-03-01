@@ -5,6 +5,7 @@ import { TecnicoReadComponent } from './views/components/tecnico/tecnico-read/te
 import { TecnicoCreateComponent } from './views/components/tecnico/tecnico-create/tecnico-create.component';
 import { TecnicoService } from './services/tecnico.service';
 import { TecnicoUpdateComponent } from './views/components/tecnico/tecnico-update/tecnico-update.component';
+import { TecnicoDeleteComponent } from './views/components/tecnico/tecnico-delete/tecnico-delete.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'tecnicos/update/:id',
     component: TecnicoUpdateComponent
+  },
+  {
+    path: 'tecnicos/delete/:id',
+    component: TecnicoDeleteComponent
   }
 ];
 
