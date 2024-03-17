@@ -40,6 +40,16 @@ export class OsReadComponent implements AfterViewInit {
   navigateToCreate():void {
     this.router.navigate(['os/create'])
 
-  } 
+  }
+  
+  prioridade(x : any) {
+    if(x == 'BAIXA') {
+      return 'baixa'
+    } else if (x == 'MEDIA') {
+      return 'media'
+    }else {
+      return 'alta'
+    }
+  }
 
 }
