@@ -3,6 +3,12 @@
     margin: auto;
 }
 
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 4rem;
+}
+
 .labels {
     display: flex;
     justify-content: space-between;
@@ -14,7 +20,7 @@
 
 textarea {
     min-height: 4rem;
-    max-height: 35rem;
+    max-height: 25rem;
 }
 
 button {
