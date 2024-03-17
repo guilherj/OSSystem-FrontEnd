@@ -29,9 +29,26 @@ export class OsReadComponent implements AfterViewInit {
     this.findAll();
   }
 
-  findAll(): void {
+  findAll(): void {  
+      
     this.service.findAll().subscribe((resposta) => {
-      this.lista = resposta;      
+      
+      resposta.forEach((osIndex) => {
+
+       var os = {
+        dataAbertura: osIndex.dataAbertura,
+        dataFechamento: osIndex.dataFechamento,
+        id: osIndex.id,
+        observacoes: osIndex.observacoes,
+        prioridade: osIndex.prioridade,
+        status: osIndex.status,
+        cliente: osIndex.cliente.nome,
+        tecnico: osIndex.tecnico.nome
+        }
+
+        this.lista.push(os);        
+      });          
+      //this.lista = resposta;      
       this.dataSource = new MatTableDataSource<OS>(this.lista);
       this.dataSource.paginator = this.paginator;
     })
