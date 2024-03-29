@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Dados da Ordem de Serviço</h1>
+    <mat-card class="mat-elevation-z8">
+        <p id="abertura">Data de abertura: {{ os.dataAbertura }}</p>
+        <p id="fechamento">Data de fechamento: {{ os.dataFechamento }}</p>
+        <p>Cliente: {{ os.cliente }}</p>
+        <p>Técnico: {{ os.tecnico }}</p>
+        <p>Prioridade: {{ os.prioridade }}</p>
+        <p>Status: {{ os.status }}</p>
+        <p>Observações: {{ os.observacoes }}</p>
+    </mat-card>
+    <button (click)="return()" class="mat-elevation-z8" mat-stroked-button color="warn">VOLTAR</button>
+</div>
