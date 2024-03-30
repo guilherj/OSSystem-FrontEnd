@@ -10,11 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-os-update',
   templateUrl: './os-update.component.html',
-  styleUrl: './os-update.component.css'
+  styleUrls: ['./os-update.component.css'] // Corrigido para 'styleUrls'
 })
 export class OsUpdateComponent implements OnInit {
-
-  selected = ''
 
   os: OS = {
     tecnico: '',
@@ -24,8 +22,8 @@ export class OsUpdateComponent implements OnInit {
     prioridade: ''
   }
 
-  tecnicos: Tecnico[] = []
-  clientes: Cliente[] = []
+  tecnicos: Tecnico[] = [];
+  clientes: Cliente[] = [];
 
   constructor(
     private tecnicoService: TecnicoService,
@@ -36,25 +34,27 @@ export class OsUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {      
-    this.os.id = this.route.snapshot.paramMap.get('id')
-    this.findById();
+    this.os.id = this.route.snapshot.paramMap.get('id');
+    this.findById(this.os.id);
     this.listarTecnicos();
     this.listarClientes();
+    console.log(this.os);
   }
 
-  findById(): void {
-    this.service.findById(this.os.id).subscribe(resposta => {
-      this.os = resposta;  
+  findById(id: string): void { // Adicionado id como parâmetro
+    this.service.findById(id).subscribe(resposta => { // Passando id como argumento para findById
+      this.os = resposta;
+      this.os.tecnico = resposta.tecnico.id.toString();
+      this.os.cliente = resposta.cliente.id.toString();
       this.converteDados();
     })
   }
 
   update(): void {
     console.log(this.os)
-    this.service.create(this.os).subscribe(resposta => {
+    this.service.update(this.os).subscribe(resposta => { // Substituído 'create' por 'update'
       this.service.message("OS atualizada com sucesso!");
       this.router.navigate(['os'])      
-
     }, err => {      
       this.service.message(err.error.errors[0].message)      
     })
@@ -64,35 +64,33 @@ export class OsUpdateComponent implements OnInit {
     this.router.navigate(['os'])
   }
 
-  listarTecnicos():void  {
+  listarTecnicos(): void  {
     this.tecnicoService.findAll().subscribe(resposta => {
       this.tecnicos = resposta;
     })
   }
 
-  listarClientes():void  {
+  listarClientes(): void  {
     this.clienteService.findAll().subscribe(resposta => {
       this.clientes = resposta;
     })
   }
 
   converteDados(): void {
-    if(this.os.status == 'ABERTO') {
-      this.os.status = 0;
-    } else if(this.os.status == 'ANDAMENTO') {
-      this.os.status = 1;
+    if (this.os.status == 'ABERTO') {
+      this.os.status = '0'; // Corrigido para string
+    } else if (this.os.status == 'ANDAMENTO') {
+      this.os.status = '1'; // Corrigido para string
     } else {
-      this.os.status = 2;
+      this.os.status = '2'; // Corrigido para string
     }
 
-    if(this.os.prioridade == 'BAIXA') {
-      this.os.prioridade = 0;
-    } else if(this.os.prioridade == 'MEDIA') {
-      this.os.prioridade = 1;
+    if (this.os.prioridade == 'BAIXA') {
+      this.os.prioridade = '0'; // Corrigido para string
+    } else if (this.os.prioridade == 'MEDIA') {
+      this.os.prioridade = '1'; // Corrigido para string
     } else {
-      this.os.prioridade = 2;
+      this.os.prioridade = '2'; // Corrigido para string
     }
   }
- 
-
 }
